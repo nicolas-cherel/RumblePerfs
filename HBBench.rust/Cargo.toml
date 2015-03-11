@@ -1,0 +1,11 @@
+[package]
+
+name = "HBBench"
+version = "0.0.1"
+authors = ["Nicolas Cherel <nicolas.cherel@gmail.com>"]
+
+[dependencies]
+rustc-serialize = "0.3"
+
+[dependencies.rumblebars]
+git="git://github.com/nicolas-cherel/rumblebars.git"
