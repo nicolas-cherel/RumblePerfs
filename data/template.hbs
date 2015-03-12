@@ -1,7 +1,7 @@
-<h1>RumbleBars commits</h1>
+<h1>Commits list</h1>
 
 <ul>
-{{#each}}
+{{#this}}
   <li>
     <div class="head">
       <div>{{commit.message}}</div>
@@ -9,5 +9,5 @@
       <div>{{commit.author.date}}</div>
     </div>
   </li>
-{{/each}}
+{{/this}}
 </ul>

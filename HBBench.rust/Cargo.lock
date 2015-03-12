@@ -27,7 +27,7 @@ dependencies = [
 [[package]]
 name = "rumblebars"
 version = "0.0.1"
-source = "git+git://github.com/nicolas-cherel/rumblebars.git#1479a3c498ee31e59cc83ec157aaa083b0e0f547"
+source = "git+git://github.com/nicolas-cherel/rumblebars.git#43d1e4871f72574639903b8c804a6da7ee70c375"
 dependencies = [
  "regex 0.1.15 (registry+https://github.com/rust-lang/crates.io-index)",
  "regex_macros 0.1.9 (registry+https://github.com/rust-lang/crates.io-index)",
