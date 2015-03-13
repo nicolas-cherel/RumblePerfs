@@ -59,7 +59,7 @@ public class HBBench {
 	Object data;
 
 	void prepareContent() throws IOException {
-		this.warmUpData = new ObjectMapper().readTree("{\"text\": \"some string\", \"elemet\": [1, 2, 3, 4]}");
+		this.warmUpData = new ObjectMapper().readTree("{\"text\": \"some string\", \"list\": [{\"element\": 1}, {\"element\": 2}, {\"element\": 3}, {\"element\": 4}]}");
 		this.warmupTemplate = hb.compileInline(this.warmupCompile);
 		
 		byte[] content = Files.readAllBytes(Paths.get("../data/template.hbs"));
