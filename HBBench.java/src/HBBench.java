@@ -159,6 +159,8 @@ public class HBBench {
     	HBBench b = new HBBench();
     	b.prepareCompile();
     	
+    	HashMap<String, HashMap<String, Stats>> allStats = new HashMap<String, HashMap<String,Stats>>(); 
+    	
     	for (Entry<String, String> t: b.stringTemplate.entrySet()) {
         	HashMap<String, Stats> stats = new HashMap<String, Stats>();
         	stats.put("compile", new Stats());
@@ -170,8 +172,20 @@ public class HBBench {
         	measure(stats, "expansion", (Void) -> b.warmupExpansion(), (Void) -> b.expansion());
 
 
-        	System.out.println(t.getKey() + " " + stats);
-    	}    	
+        	allStats.put(t.getKey(), stats);
+    	}
+    	
+
+    	for (Entry<String, HashMap<String, Stats>> all: allStats.entrySet()) {
+    		for (Entry<String, Stats> t: all.getValue().entrySet()) {
+    			String padder = "                          ";
+    			String name = all.getKey() + " " + t.getKey();
+    			String padded = name + padder.substring(Math.min(name.length(), padder.length()-1));
+    			System.out.println("test " + padded + " ... bench: " + String.format("%10d", t.getValue().getAvg()) + 
+    					" ns/iter (+/- " + t.getValue().getDelta() + ")" +
+    					" — cold " + t.getValue().getCold() + " ns");
+    		}
+    	}
     }
 
 
