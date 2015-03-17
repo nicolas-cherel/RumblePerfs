@@ -181,7 +181,7 @@ public class HBBench {
     			String padder = "                          ";
     			String name = all.getKey() + " " + t.getKey();
     			String padded = name + padder.substring(Math.min(name.length(), padder.length()-1));
-    			System.out.println("test " + padded + " ... bench: " + String.format("%10d", t.getValue().getAvg()) + 
+    			System.out.println("test " + padded + " ... bench: " + String.format("%12d", t.getValue().getAvg()) + 
     					" ns/iter (+/- " + t.getValue().getDelta() + ")" +
     					" — cold " + t.getValue().getCold() + " ns");
     		}

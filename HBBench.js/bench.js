@@ -43,6 +43,7 @@ var hrtNano = function(hrt) {
 }
 
 var measure = function(statsSet, setName, warmup, c) {
+
   {
     var start = process.hrtime();
     c();
@@ -98,7 +99,25 @@ Promise.all(loading).then(function(allLoaded) {
 
   });
 
-  console.log(allStats);
+  var padder = "                          ";
+  var numPad = "            ";
+
+  Object.keys(allStats).forEach(function(suiteName) {
+    var suite = allStats[suiteName];
+
+    Object.keys(suite).forEach(function(testName) {
+      var test = suite[testName];
+
+      var name = suiteName + " " + testName;
+      var padded = name + padder.substring(Math.min(name.length, padder.length-1));
+      var fixedAvg = Math.round(test.avg).toString();
+      var avgPadded = numPad.substring(Math.min(fixedAvg.length, numPad.length-1)) + fixedAvg;
+      console.log("test " + padded + " ... bench: " + avgPadded + " ns/iter (+/- " + test.delta + ")" + " — cold " + test.cold + " ns");
+    });
+
+
+  });
+  
 
 }).catch(function(yo) {
   process.stdout("failure")
