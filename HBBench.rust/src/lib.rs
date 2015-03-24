@@ -8,7 +8,6 @@ use std::fs::File;
 use std::io::Read;
 use test::Bencher;
 
-
 #[bench]
 fn compile(b: &mut Bencher) {
   let mut f = File::open("../data/template.hbs").unwrap();
@@ -44,7 +43,8 @@ fn expansion(b: &mut Bencher) {
 
     
     b.iter(|| {
-      let mut out = Vec::<u8>::new();
+      let mut vec = Vec::<u8>::new();
+      let mut out = ::std::io::BufWriter::new(&mut vec as &mut ::std::io::Write);
       ::rumblebars::eval(&t, &j, &mut out, &::std::default::Default::default())  
     })
 }
@@ -73,7 +73,8 @@ fn helper_expansion(b: &mut Bencher) {
 
     
     b.iter(|| {
-      let mut out = Vec::<u8>::new();
-      ::rumblebars::eval(&t, &j, &mut out, &::std::default::Default::default())  
+      let mut vec = Vec::<u8>::new();
+      let mut out = ::std::io::BufWriter::new(&mut vec as &mut ::std::io::Write);
+      ::rumblebars::eval(&t, &j, &mut out, &::std::default::Default::default())
     })
 }
