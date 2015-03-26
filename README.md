@@ -5,6 +5,7 @@ While I took care in trying to build fair benches against others technologies, t
 ### comments
  - rumblebars does not compile the template, it just parses a data struct that is evaluated against data.
  - js and java implementation runs on JITed VMs, and my benches cases varies too little on templates and data to avoid those JIT compilers to optimise for the bench specific dataset.
+ - I didn't look at memory usage, but I'm very confident that rumblebars is much lighter than node/jvm.
 
 ## results
 
@@ -18,7 +19,7 @@ test expansion        ... bench:    830288 ns/iter (+/- 203735)
 test helper_expansion ... bench:    960074 ns/iter (+/- 260606)
 ```
 
-### handlebars js
+### handlebars.js (node.js)
 
 ```
 test helper compile             ... bench:         6325 ns/iter (+/- 4885) — cold 140079 ns
