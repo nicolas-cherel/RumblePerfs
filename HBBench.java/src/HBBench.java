@@ -140,7 +140,7 @@ public class HBBench {
     	}
     	
     	{
-    		int iterations = 20;
+    		int iterations = 5;
     		long start = System.nanoTime();
     		long max = Long.MIN_VALUE;
     		long min = Long.MAX_VALUE;

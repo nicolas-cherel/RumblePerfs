@@ -16,6 +16,13 @@ fn compile() {
   }
 }
 
+struct NullWrite;
+
+impl ::std::io::Write for NullWrite {
+  fn write(&mut self, buf: &[u8]) -> ::std::io::Result<usize> { Ok(buf.len()) }
+  fn flush(&mut self) -> ::std::io::Result<()> { Ok(()) }
+}
+
 fn expand() {
   let t = {
     let mut f = File::open("../data/template.hbs").unwrap();
@@ -40,7 +47,9 @@ fn expand() {
   for _ in (0..2000) {
     let mut vec = Vec::<u8>::new();
     {
-      let mut out = ::std::io::BufWriter::new(&mut vec as &mut ::std::io::Write);
+      let mut n = NullWrite;
+      let mut out = ::std::io::BufWriter::new(&mut n as &mut ::std::io::Write);
+      // let mut out = ::std::io::BufWriter::new(&mut vec as &mut ::std::io::Write);
       ::rumblebars::eval(&t, &j, &mut out, &::std::default::Default::default());
     }
   }

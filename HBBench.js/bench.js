@@ -56,7 +56,7 @@ var measure = function(statsSet, setName, warmup, c) {
   }
   
   {
-    var iterations = 20;
+    var iterations = 5;
     var measures = new Array(iterations);
     var start = process.hrtime();
 

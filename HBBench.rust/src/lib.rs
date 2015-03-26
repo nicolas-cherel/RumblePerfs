@@ -20,6 +20,17 @@ fn compile(b: &mut Bencher) {
 }
 
 #[bench]
+fn compile_helper(b: &mut Bencher) {
+  let mut f = File::open("../data/helper.hbs").unwrap();
+  let mut s = String::new();
+  f.read_to_string(&mut s);
+
+  b.iter(|| {
+    s.parse::<rumblebars::Template>()
+  })
+}
+
+#[bench]
 fn expansion(b: &mut Bencher) {
     let t = {
       let mut f = File::open("../data/template.hbs").unwrap();
