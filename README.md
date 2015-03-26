@@ -5,11 +5,25 @@ While I took care in trying to build fair benches against others technologies, t
 ### comments
  - rumblebars does not compile the template, it just parses a data struct that is evaluated against data.
  - js and java implementation runs on JITed VMs, and my benches cases varies too little on templates and data to avoid those JIT compilers to optimise for the bench specific dataset.
+ - java and js bench have a warmup on their compiler code, bench is runned  5 times to leverage some JIT advantage.
  - I didn't look at memory usage, but I'm very confident that rumblebars is much lighter than node/jvm.
 
 ## results
 
-### rumblebars
+### table
+
+| test (ns/iter)   | rumblebars | handlebars.js | handlebars java |
+| ---------------- | ----------:| -------------:| ---------------:|
+| basic compile    | 188310     | 2740          | 665583          |
+| helper compile   | 320673     | 6325          | 587871          |
+| basic expansion  | 830288     | 353103        | 1646359         |
+| helper expansion | 960074     | 965696        | 1433598         |
+
+
+
+### outputs
+
+##### rumblebars
 
 
 ```
@@ -19,7 +33,7 @@ test expansion        ... bench:    830288 ns/iter (+/- 203735)
 test helper_expansion ... bench:    960074 ns/iter (+/- 260606)
 ```
 
-### handlebars.js (node.js)
+##### handlebars.js (node.js)
 
 ```
 test helper compile             ... bench:         6325 ns/iter (+/- 4885) — cold 140079 ns
@@ -30,7 +44,7 @@ test template expansion         ... bench:       353103 ns/iter (+/- 438287) —
 
 I just don't understand those compilation results. The v8 JIT compiler must be doing a great job.
 
-### handlebars java (jknack)
+##### handlebars java (jknack)
 
 ```
 test template compile           ... bench:       665583 ns/iter (+/- 631598) — cold 75833866 ns
